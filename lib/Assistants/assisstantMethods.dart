@@ -115,6 +115,7 @@ class AssistantMethods
 
   static void retrieveHistInfo(context)
   {
+
     // Retrieve and display earnings
     driversRef.child(currentFirebaseUser.uid).child("earnings").once().then((DataSnapshot dataSnapshot) {
       if(dataSnapshot.value != null)

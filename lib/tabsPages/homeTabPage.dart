@@ -46,6 +46,55 @@ class _HomeTabPageState extends State<HomeTabPage> {
     getCurrentDriverInfo();
   }
 
+  getRatings()
+  {
+    // Update Ratings
+    driversRef.child(currentFirebaseUser.uid).child("ratings").once().then((DataSnapshot dataSnapshot) {
+      if(dataSnapshot.value != null)
+      {
+        double ratings = double.parse(dataSnapshot.value.toString());
+        setState(() {
+          starCounter = ratings;
+        });
+        if(starCounter <= 1)
+        {
+          setState(() {
+            title = "Very Bad";
+          });
+          return;
+        }
+        if(starCounter <= 2)
+        {
+          setState(() {
+            title = "Bad";
+          });
+          return;
+        }
+        if(starCounter <= 3)
+        {
+          setState(() {
+            title = "Good";
+          });
+          return;
+        }
+        if(starCounter <= 4)
+        {
+          setState(() {
+            title = "Very Good";
+          });
+          return;
+        }
+        if(starCounter <= 5)
+        {
+          setState(() {
+            title = "Excellent";
+          });
+          return;
+        }
+      }
+    });
+  }
+
   void locatePosition() async
   {
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
@@ -77,6 +126,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
     pushNotificationService.getToken();
 
     AssistantMethods.retrieveHistInfo(context);
+    getRatings();
   }
 
   @override
