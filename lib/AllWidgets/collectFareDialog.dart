@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uber_clone_driver/Assistants/assisstantMethods.dart';
+import 'package:uber_clone_driver/congifMaps.dart';
 import 'package:uber_clone_driver/main.dart';
 
 class CollectFareDialog extends StatelessWidget
@@ -28,7 +29,7 @@ class CollectFareDialog extends StatelessWidget
           children: [
             SizedBox(height: 22.0,),
 
-            Text("Trip Fare"),
+            Text("Trip Fare (" + rideType.toUpperCase() + ")"),
 
             SizedBox(height: 22.0,),
 

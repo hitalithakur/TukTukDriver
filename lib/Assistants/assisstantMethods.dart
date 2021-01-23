@@ -82,8 +82,21 @@ class AssistantMethods
     //Local Currency
     //1$ = 70Rs
     double totalLocalAmount = totalFareAmount; //* 70;
+    if(rideType == "male")
+    {
+      double result = totalLocalAmount;
+      return result.truncate();
+    }
+    else if(rideType == "female")
+    {
+      double result = totalLocalAmount;
+      return result.truncate();
+    }
+    else
+    {
+      return totalLocalAmount.truncate();
+    }
 
-    return totalLocalAmount.truncate();
   }
 
   // static void getCurrentOnlineUserInfo() async

@@ -46,6 +46,18 @@ class _HomeTabPageState extends State<HomeTabPage> {
     getCurrentDriverInfo();
   }
 
+  getRideType()
+  {
+    driversRef.child(currentFirebaseUser.uid).child("car_details").child("type").once().then((DataSnapshot snapshot) {
+      if(snapshot.value != null)
+      {
+        setState(() {
+          rideType = snapshot.value.toString();
+        });
+      }
+    });
+  }
+
   getRatings()
   {
     // Update Ratings
@@ -127,6 +139,7 @@ class _HomeTabPageState extends State<HomeTabPage> {
 
     AssistantMethods.retrieveHistInfo(context);
     getRatings();
+    getRideType();
   }
 
   @override

@@ -49,7 +49,7 @@ class _RatingTabPageState extends State<RatingTabPage> {
 
               SizedBox(height: 14.0,),
 
-              Text(title, style: TextStyle(fontSize: 55.0, fontFamily: "Signatra", color: Colors.green),),
+              Text(title, style: TextStyle(fontSize: 55.0, fontFamily: "Brand Bold", color: Colors.green),),
 
               SizedBox(height: 16.0,),
 
