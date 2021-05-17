@@ -13,6 +13,8 @@ class CarInfoScreen extends StatelessWidget
   TextEditingController carNumberTextEditingController = TextEditingController();
   TextEditingController carColorTextEditingController = TextEditingController();
 
+  String selectedCarType;
+  List<String> carTypesList = ["male", "female"];
 
   @override
   Widget build(BuildContext context) 
@@ -29,13 +31,13 @@ class CarInfoScreen extends StatelessWidget
                 child: Column(
                   children: [
                     SizedBox(height: 12.0,),
-                    Text("Enter Car Details", style: TextStyle(fontFamily: "Brand Bold", fontSize: 24.0),),
+                    Text("Enter Rickshaw Details", style: TextStyle(fontFamily: "Brand Bold", fontSize: 24.0),),
 
                     SizedBox(height: 26.0,),
                     TextField(
                       controller: carModelTextEditingController,
                       decoration: InputDecoration(
-                        labelText: "Car Model",
+                        labelText: "Vehicle Registration Number",
                         hintStyle: TextStyle(color: Colors.grey, fontSize: 10.0),
                       ),
                       style: TextStyle(fontSize: 15.0),
@@ -45,7 +47,7 @@ class CarInfoScreen extends StatelessWidget
                     TextField(
                       controller: carNumberTextEditingController,
                       decoration: InputDecoration(
-                        labelText: "Car Number",
+                        labelText: "Vehicle Number",
                         hintStyle: TextStyle(color: Colors.grey, fontSize: 10.0),
                       ),
                       style: TextStyle(fontSize: 15.0),
@@ -55,10 +57,30 @@ class CarInfoScreen extends StatelessWidget
                     TextField(
                       controller: carColorTextEditingController,
                       decoration: InputDecoration(
-                        labelText: "Car Color",
+                        labelText: "Vehicle Color",
                         hintStyle: TextStyle(color: Colors.grey, fontSize: 10.0),
                       ),
                       style: TextStyle(fontSize: 15.0),
+                    ),
+
+                    SizedBox(height: 26.0,),
+
+                    DropdownButton(
+                      iconSize: 40,
+                      hint: Text("Gender"),
+                      value: selectedCarType,
+                      onChanged: (newValue)
+                      {
+                        selectedCarType = newValue;
+                        displayToastMessage(selectedCarType, context);
+                      },
+                      items: carTypesList.map((car)
+                      {
+                        return DropdownMenuItem(
+                          child: new Text(car),
+                          value: car,
+                        );
+                      }).toList(),
                     ),
 
                     SizedBox(height: 42.0,),
@@ -79,6 +101,10 @@ class CarInfoScreen extends StatelessWidget
                           if(carColorTextEditingController.text.isEmpty)
                           {
                             displayToastMessage("Please provide car color.", context);
+                          }
+                          if(selectedCarType == null)
+                          {
+                            displayToastMessage("Please select car type.", context);
                           }
                           else
                           {
@@ -117,6 +143,7 @@ class CarInfoScreen extends StatelessWidget
       "car_color": carColorTextEditingController.text,
       "car_number": carNumberTextEditingController.text,
       "car_model": carModelTextEditingController.text,
+      "type": selectedCarType ,
     };
     
     driversRef.child(userId).child("car_details").set(carInfoMap);
